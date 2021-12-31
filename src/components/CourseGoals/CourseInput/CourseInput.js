@@ -1,7 +1,44 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import Button from '../../UI/Button/Button';
 import './CourseInput.css';
+
+const FormControl = styled.div`
+  
+  margin: 0.5rem 0;
+  
+  & label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  & input {
+    display: block;
+    width: 100%;
+    border: 1px solid #ccc;
+    font: inherit;
+    line-height: 1.5rem;
+    padding: 0 0.25rem;
+  }
+
+  & input:focus {
+    outline: none;
+    background: #fad0ec;
+    border-color: #8b005d;
+  }
+
+
+  &.invalid input {
+    border-color: red;
+    background: #ffd7d7;
+  }
+
+  &.invalid label {
+    color: red;
+  }
+`;
 
 const CourseInput = props => {
   const [enteredValue, setEnteredValue] = useState('');
@@ -25,15 +62,14 @@ const CourseInput = props => {
     props.onAddGoal(enteredValue);
   };
 
-  //`` backtick symbol is reserved symbol in java script which treats any text as a regular string 
-  // you can also inject dynamic value into this string with the specail style ${}
-  // in our example we add style invalid if form control is invalid 
+  //here we replace div element with FormControl styled component. 
+  //we copied styled from css files, removed .form-control class and added & symbol for all other classes
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className={`form-control ${!isValid ? 'invalid' : ''}`}>
+      <FormControl className={!isValid && 'invalid'}>
         <label >Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
-      </div>
+      </FormControl>
       <Button type="submit">Add Goal</Button>
     </form>
   );
