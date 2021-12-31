@@ -56,7 +56,7 @@ const CourseInput = props => {
   };
 
   //we use form-control css module in square braces because it is not recognized when it is used with the word control 
-  //we also use backticks symbol to addd invalid class to the form control
+  //we also use backticks symbol to add invalid class to the form control
   return (
     <form onSubmit={formSubmitHandler}>
       <div className={`${styles['form-control']} ${!isValid && styles.invalid}`}>
